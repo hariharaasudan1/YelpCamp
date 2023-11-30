@@ -25,7 +25,7 @@ const reviewRoutes = require('./routes/reviewRoutes')
 const dbUrl = process.env.DB_URL;
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
 const store = new MongoDBStore({
-    url: 'mongodb://localhost:27017/yelp-camp',
+    url: dbUrl,
     secret: 'password',
     touchAfter: 24 * 60 * 60
 });
